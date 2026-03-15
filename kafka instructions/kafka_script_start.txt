@@ -1,0 +1,45 @@
+1️⃣ Edit the Script
+
+Open the script again:
+
+nano /opt/kafka/start-kafka.sh
+
+Replace everything with this:
+#############################################################################################
+#!/bin/bash
+
+echo "Starting Zookeeper..."
+
+nohup /opt/kafka/bin/zookeeper-server-start.sh /opt/kafka/config/zookeeper.properties > zookeeper.log 2>&1 &
+
+sleep 5
+
+echo "Starting Kafka broker..."
+
+nohup /opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties > kafka.log 2>&1 &
+
+echo "Kafka and Zookeeper started successfully"
+
+##########################################################################################
+
+Save and exit.
+
+2️⃣ Make Sure Script is Executable
+chmod +x /opt/kafka/start-kafka.sh
+3️⃣ Run the Script
+./start-kafka.sh
+
+You should see:
+
+Starting Zookeeper...
+Starting Kafka broker...
+Kafka and Zookeeper started successfully
+
+Now both services run in the background.
+
+root@DESKTOP-9GPJRFJ:/opt/kafka# chmod +x /opt/kafka/start-kafka.sh
+root@DESKTOP-9GPJRFJ:/opt/kafka# ./start-kafka.sh
+Starting Zookeeper...
+Starting Kafka broker...
+Kafka and Zookeeper started successfully
+root@DESKTOP-9GPJRFJ:/opt/kafka# 

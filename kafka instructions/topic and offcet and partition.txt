@@ -1,0 +1,107 @@
+topic and offcet and partition
+A topic is like a stream of events.
+
+Example:
+
+pizza_orders
+
+Messages inside it might look like:
+
+order_1001
+order_1002
+order_1003
+
+But Kafka does not store them in one list.
+It splits them into partitions.
+
+2️⃣ What is a Partition
+
+A partition is basically a log file where messages are appended sequentially.
+
+Example topic:
+
+pizza_orders
+
+with 3 partitions
+
+pizza_orders
+ ├── partition 0
+ ├── partition 1
+ └── partition 2
+
+Messages might be stored like this:
+
+Partition 0
+offset 0 → order_1001
+offset 1 → order_1005
+
+Partition 1
+offset 0 → order_1002
+offset 1 → order_1006
+
+Partition 2
+offset 0 → order_1003
+offset 1 → order_1004
+
+Each partition is processed independently.
+
+3️⃣ What is an Offset
+
+An offset is simply the position of a message inside a partition.
+
+Example:
+
+Partition 0
+offset 0 → order_1001
+offset 1 → order_1005
+offset 2 → order_1008
+
+Kafka consumers remember the last offset they read.
+
+Example:
+
+Consumer last offset = 1
+
+Next read starts from:
+
+offset 2
+
+This allows exact progress tracking.
+
+4️⃣ Why Partitions Exist (Important)
+
+Partitions allow parallel processing.
+
+Example:
+
+Kafka Topic
+      ↓
+3 partitions
+      ↓
+3 Spark workers
+
+Each worker processes one partition.
+
+Partition 0 → Worker 1
+Partition 1 → Worker 2
+Partition 2 → Worker 3
+
+This is why Kafka scales to millions of events per second.
+
+5️⃣ Visual Example for Your Pipeline
+
+Your pizza system produces orders:
+
+order_1001
+order_1002
+order_1003
+order_1004
+
+Kafka stores them:
+
+pizza_orders
+ ├── P0 → order_1001
+ ├── P1 → order_1002
+ └── P2 → order_1003
+
+Then Spark Streaming reads them in parallel.

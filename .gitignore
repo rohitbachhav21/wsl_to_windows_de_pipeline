@@ -1,0 +1,4 @@
+__pycache__
+kafka_producer/__pycache__
+spark/__pycache__
+kafka_producer/checkpoint.txt

@@ -1,0 +1,35 @@
+Create Your First Topic
+
+Now test Kafka:
+
+/opt/kafka/bin/kafka-topics.sh \
+--create \
+--topic pizza_orders \
+--bootstrap-server localhost:9092 \
+--partitions 1 \
+--replication-factor 1
+
+Check:
+
+/opt/kafka/bin/kafka-topics.sh --list --bootstrap-server localhost:9092
+
+Expected output:
+
+pizza_orders
+
+
+Test Kafka (Producer + Consumer)
+
+Before connecting Python or MySQL, it's good to test Kafka with built-in tools.
+
+Terminal 1 — Consumer
+/opt/kafka/bin/kafka-console-consumer.sh \
+--topic pizza_orders \
+--bootstrap-server localhost:9092
+
+This terminal will wait for messages.
+
+Terminal 2 — Producer
+/opt/kafka/bin/kafka-console-producer.sh \
+--topic pizza_orders \
+--bootstrap-server localhost:9092

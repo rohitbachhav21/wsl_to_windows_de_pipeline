@@ -1,0 +1,10 @@
+Check Your Topic Details
+
+Run:
+
+/opt/kafka/bin/kafka-topics.sh \
+--describe \
+--topic pizza_orders \
+--bootstrap-server localhost:9092
+
+You will see something like:

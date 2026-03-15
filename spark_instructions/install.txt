@@ -1,0 +1,7 @@
+Always run Spark with the Kafka connector package for Apache Kafka:
+
+spark-submit \
+--packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0,org.postgresql:postgresql:42.7.3 \
+spark_kafka_consumer.py 2&>1 | spark_kafka_consumer.py
+
+The first run will download the connector.
