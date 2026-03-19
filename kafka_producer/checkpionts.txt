@@ -1,0 +1,2 @@
+rm -rf /tmp/pizza_orders_checkpoint
+rm -rf /tmp/pizza_sales_checkpoint
